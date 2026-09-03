@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #060d17;
+  color: white;
+}
+
+header {
+  height: 80px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #172437;
+  background: #07101c;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: #168cff;
+}
+
+nav {
+  display: flex;
+  gap: 35px;
+}
+
+nav a {
+  color: #d5deea;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #168cff;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 13px 25px;
+  font-size: 15px;
+  border: none;
+}
+
+.login {
+  color: white;
+  background: transparent;
+  border: 1px solid #24415f;
+}
+
+.signup,
+.primary {
+  background: #168cff;
+  color: white;
+}
+
+.hero {
+  min-height: 600px;
+  padding: 100px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-text {
+  max-width: 650px;
+}
+
+.small-title {
+  color: #168cff;
+  letter-spacing: 5px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 62px;
+  line-height: 1.05;
+  margin-bottom: 25px;
+}
+
+h1 span {
+  color: #168cff;
+}
+
+.description {
+  color: #aab8ca;
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: 570px;
+}
+
+.buttons {
+  margin-top: 35px;
+  display: flex;
+  gap: 15px;
+}
+
+.secondary {
+  background: transparent;
+  color: white;
+  border: 1px solid #168cff;
+}
+
+.coin-display {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  border: 2px solid #168cff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 0 80px rgba(22, 140, 255, .25);
+}
+
+.globe {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: #151d29;
+  border: 4px solid #f6b91a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
+  color: #f6b91a;
+}
+
+.coin {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  font-weight: bold;
+  background: #263244;
+}
+
+.ethereum {
+  top: 25px;
+  right: 20px;
+  color: #8ea8ff;
+}
+
+.solana {
+  bottom: 25px;
+  left: 20px;
+  color: #20d9c5;
+}
+
+.markets,
+.features,
+.about {
+  padding: 80px 7%;
+  text-align: center;
+  border-top: 1px solid #172437;
+}
+
+h2 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.section-text {
+  color: #8797aa;
+  margin-bottom: 40px;
+}
+
+.market-grid,
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.market-card,
+.feature {
+  background: #0b1522;
+  border: 1px solid #1a2d43;
+  border-radius: 14px;
+  padding: 28px;
+  text-align: left;
+}
+
+.market-card h3 {
+  margin: 18px 0 8px;
+  font-size: 24px;
+}
+
+.coin-name {
+  font-size: 17px;
+}
+
+.coin-name small {
+  color: #7e8da0;
+}
+
+.positive {
+  color: #20d889;
+}
+
+.feature {
+  text-align: center;
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.feature h3 {
+  margin-bottom: 12px;
+}
+
+.feature p,
+.about p {
+  color: #94a4b8;
+  line-height: 1.7;
+}
+
+.about p {
+  max-width: 700px;
+  margin: auto;
+}
+
+footer {
+  padding: 35px 7%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #172437;
+  color: #718196;
+}
+
+@media (max-width: 800px) {
+
+  header {
+    padding: 0 20px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .hero {
+    padding: 70px 25px;
+    flex-direction: column;
+    text-align: center;
+    gap: 60px;
+  }
+
+  h1 {
+    font-size: 43px;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+
+  .coin-display {
+    width: 280px;
+    height: 280px;
+  }
+
+  .globe {
+    width: 140px;
+    height: 140px;
+    font-size: 70px;
+  }
+
+  .market-grid,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
