@@ -21,11 +21,67 @@
             justify-content: center;
             color: #e2e8f0;
             transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Crypto USA Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animated crypto symbols background */
+        body::after {
+            content: '₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-size: 8rem;
+            font-weight: bold;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.2;
+            color: #3b82f6;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-1000px); }
         }
 
         body.light-mode {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             color: #1a1a1a;
+        }
+
+        body.light-mode::before {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+        }
+
+        body.light-mode::after {
+            color: #8b5cf6;
+            opacity: 0.02;
         }
 
         /* Theme Toggle Button */
@@ -75,6 +131,8 @@
             width: 100%;
             height: 100vh;
             box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
         }
 
         body.light-mode .login-wrapper {
@@ -89,10 +147,51 @@
             align-items: center;
             padding: 4rem 2rem;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* USA map pattern background */
+        .login-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20 30 L40 20 L60 30 L50 50 L70 60 L40 70 L30 50 Z' fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 50px 50px;
+            opacity: 0.3;
+            animation: slideLeft 30s linear infinite;
+        }
+
+        @keyframes slideLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        /* Crypto coin animations */
+        .login-left::after {
+            content: '₿';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.08;
+            animation: float 6s ease-in-out infinite;
+            top: 10%;
+            right: -5%;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
         }
 
         .login-left-content {
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .logo-container {
@@ -145,6 +244,8 @@
             align-items: center;
             padding: 4rem 2rem;
             transition: background 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
 
         body.light-mode .login-right {
