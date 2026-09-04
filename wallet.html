@@ -399,7 +399,7 @@
 
         <div class="balance-card">
             <div class="balance-label">Total Portfolio Value</div>
-            <div class="balance-amount" id="totalBalance">$62,825,286.61</div>
+            <div class="balance-amount">$62,825,286.61</div>
             <div class="balance-meta">
                 <span>Last Updated: <span id="updateTime">Just now</span></span>
                 <span>Status: <span style="color: #10b981;">● Active</span></span>
@@ -413,22 +413,22 @@
             <div class="assets-grid" id="assetsContainer">
                 <div class="loading">
                     <div class="spinner"></div>
-                    <p>Loading real-time market data...</p>
+                    <p>Loading asset data...</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Crypto holdings adjusted to equal $62,825,286.61
+        // Fixed crypto holdings that equal $62,825,286.61 with Bitcoin dominant
         const holdings = {
-            'bitcoin': { amount: 750, symbol: 'BTC', id: 'bitcoin' },
-            'ethereum': { amount: 24000, symbol: 'ETH', id: 'ethereum' },
-            'ripple': { amount: 42000000, symbol: 'XRP', id: 'ripple' },
-            'litecoin': { amount: 1300000, symbol: 'LTC', id: 'litecoin' },
-            'cardano': { amount: 300000000, symbol: 'ADA', id: 'cardano' },
-            'polkadot': { amount: 75000000, symbol: 'DOT', id: 'polkadot' },
-            'dogecoin': { amount: 750000000, symbol: 'DOGE', id: 'dogecoin' }
+            'bitcoin': { amount: 750, value: 59625000 }, // Bitcoin has the most value
+            'ethereum': { amount: 24000, value: 1560000 },
+            'ripple': { amount: 42000000, value: 600000 },
+            'litecoin': { amount: 1300000, value: 45000 },
+            'cardano': { amount: 300000000, value: 630000 },
+            'polkadot': { amount: 75000000, value: 195000 },
+            'dogecoin': { amount: 750000000, value: 170286.61 }
         };
 
         // Map coin IDs to CoinGecko image URLs
@@ -442,59 +442,38 @@
             'dogecoin': 'https://assets.coingecko.com/coins/images/5/large/dogecoin.png'
         };
 
-        async function fetchCryptoPrices() {
-            try {
-                const ids = Object.keys(holdings).join(',');
-                const response = await fetch(
-                    `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
-                );
-                
-                if (!response.ok) throw new Error('Failed to fetch prices');
-                
-                const data = await response.json();
-                displayAssets(data);
-                updateTime();
-            } catch (error) {
-                console.error('Error fetching prices:', error);
-                displayAssets(null);
-            }
-        }
+        const coinNames = {
+            'bitcoin': 'Bitcoin',
+            'ethereum': 'Ethereum',
+            'ripple': 'Ripple',
+            'litecoin': 'Litecoin',
+            'cardano': 'Cardano',
+            'polkadot': 'Polkadot',
+            'dogecoin': 'Dogecoin'
+        };
 
-        function displayAssets(priceData) {
+        const coinSymbols = {
+            'bitcoin': 'BTC',
+            'ethereum': 'ETH',
+            'ripple': 'XRP',
+            'litecoin': 'LTC',
+            'cardano': 'ADA',
+            'polkadot': 'DOT',
+            'dogecoin': 'DOGE'
+        };
+
+        function displayAssets() {
             const container = document.getElementById('assetsContainer');
             container.innerHTML = '';
 
-            let totalValue = 0;
+            // Sort by value descending
+            const sortedAssets = Object.entries(holdings).sort(([,a], [,b]) => b.value - a.value);
 
-            Object.entries(holdings).forEach(([cryptoKey, { amount, symbol, id }]) => {
-                let price = 0;
-                let change24h = 0;
-                let value = 0;
-
-                if (priceData && priceData[cryptoKey]) {
-                    price = priceData[cryptoKey].usd || 0;
-                    change24h = priceData[cryptoKey].usd_24h_change || 0;
-                    value = amount * price;
-                    totalValue += value;
-                } else {
-                    const fallbackPrices = {
-                        'bitcoin': 79500,
-                        'ethereum': 2400,
-                        'ripple': 1.43,
-                        'litecoin': 45,
-                        'cardano': 0.21,
-                        'polkadot': 0.86,
-                        'dogecoin': 0.085
-                    };
-                    price = fallbackPrices[cryptoKey] || 0;
-                    value = amount * price;
-                    totalValue += value;
-                }
-
-                const isPositive = change24h >= 0;
-                const changeIcon = isPositive ? '📈' : '📉';
-                const changeClass = isPositive ? 'positive' : 'negative';
+            sortedAssets.forEach(([cryptoKey, { amount, value }]) => {
+                const price = value / amount;
                 const logoUrl = coinLogos[cryptoKey];
+                const name = coinNames[cryptoKey];
+                const symbol = coinSymbols[cryptoKey];
 
                 const card = document.createElement('div');
                 card.className = 'asset-card';
@@ -505,15 +484,12 @@
                                 <img src="${logoUrl}" alt="${symbol}" onerror="this.style.display='none'">
                             </div>
                             <div class="asset-name-group">
-                                <h3>${cryptoKey.charAt(0).toUpperCase() + cryptoKey.slice(1)}</h3>
+                                <h3>${name}</h3>
                                 <div class="asset-symbol">${symbol}</div>
                             </div>
                         </div>
                         <div class="asset-price">
                             <div class="asset-price-value">$${price.toFixed(2)}</div>
-                            <div class="price-change ${changeClass}">
-                                ${changeIcon} ${isPositive ? '+' : ''}${change24h.toFixed(2)}%
-                            </div>
                         </div>
                     </div>
                     <div class="asset-divider"></div>
@@ -528,9 +504,6 @@
                 `;
                 container.appendChild(card);
             });
-
-            document.getElementById('totalBalance').textContent = 
-                '$' + totalValue.toLocaleString('en-US', { maximumFractionDigits: 2 });
         }
 
         function updateTime() {
@@ -551,8 +524,8 @@
             window.location.href = 'login.html';
         }
 
-        fetchCryptoPrices();
-        setInterval(fetchCryptoPrices, 30000);
+        displayAssets();
+        updateTime();
     </script>
 </body>
 </html>
