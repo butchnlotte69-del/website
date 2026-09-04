@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - QFS USA</title>
+    <title>QFS USA Login Portal</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -40,10 +40,35 @@
             color: white;
         }
 
-        .login-left .logo {
-            font-size: 3rem;
-            font-weight: 800;
+        .login-left-content {
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: 800;
             letter-spacing: -1px;
         }
 
@@ -81,9 +106,13 @@
         }
 
         .login-header h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 0.5rem;
             color: #f0f4f8;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .login-header p {
@@ -198,6 +227,10 @@
             .login-container {
                 max-width: 100%;
             }
+
+            .login-header h1 {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
@@ -205,7 +238,12 @@
     <div class="login-wrapper">
         <div class="login-left">
             <div class="login-left-content">
-                <div class="logo">QFS USA</div>
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">QFS USA</div>
+                </div>
                 <h2>Quantum Financial System</h2>
                 <p>Secure, professional cryptocurrency management for enterprise clients worldwide.</p>
             </div>
@@ -214,8 +252,8 @@
         <div class="login-right">
             <div class="login-container">
                 <div class="login-header">
-                    <h1>Welcome Back</h1>
-                    <p>Sign in to your account</p>
+                    <h1>QFS USA Login Portal</h1>
+                    <p>Sign in to your secure account</p>
                 </div>
 
                 <div class="success-message" id="successMessage">
