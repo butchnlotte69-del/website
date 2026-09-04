@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Wallet - My Website</title>
+    <title>Wallet - QFS USA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,173 +13,284 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
             min-height: 100vh;
-            padding: 1rem;
+            color: #e2e8f0;
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(102, 126, 234, 0.95);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
             z-index: 1000;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        nav .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
         }
 
         nav a {
-            color: white;
+            color: #cbd5e1;
             text-decoration: none;
-            margin-right: 2rem;
+            margin-left: 2.5rem;
             font-weight: 500;
-            transition: opacity 0.3s;
+            transition: color 0.3s;
+            font-size: 0.95rem;
         }
 
         nav a:hover {
-            opacity: 0.8;
+            color: #3b82f6;
+        }
+
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: translateY(-2px);
         }
 
         .container {
-            max-width: 1200px;
-            margin: 80px auto 0;
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 2rem;
         }
 
-        .header {
-            text-align: center;
-            color: white;
+        .wallet-header {
+            margin-top: 80px;
             margin-bottom: 2rem;
         }
 
-        .header h1 {
+        .wallet-header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
+            color: #f0f4f8;
         }
 
-        .wallet-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-bottom: 2rem;
+        .wallet-header p {
+            color: #a1aec6;
+            font-size: 1rem;
         }
 
-        .balance-section {
-            text-align: center;
+        /* Balance Card */
+        .balance-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
             padding: 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
             margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
         }
 
         .balance-label {
+            color: #a1aec6;
             font-size: 0.9rem;
-            opacity: 0.9;
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         .balance-amount {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
         }
 
-        .balance-update {
-            font-size: 0.8rem;
-            opacity: 0.8;
+        .balance-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Assets Section */
+        .assets-section {
+            margin-bottom: 2rem;
+        }
+
+        .assets-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
         }
 
         .assets-section h2 {
-            color: #333;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            color: #f0f4f8;
         }
 
         .assets-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 1.5rem;
         }
 
         .asset-card {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
             padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
         }
 
         .asset-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .asset-header {
+        .asset-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
         }
 
-        .asset-name {
-            font-weight: 600;
-            color: #333;
+        .asset-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .asset-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .asset-name-group h3 {
+            color: #f0f4f8;
             font-size: 1.1rem;
+            margin-bottom: 0.25rem;
         }
 
         .asset-symbol {
-            color: #999;
-            font-size: 0.9rem;
+            color: #a1aec6;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         .asset-price {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #667eea;
+            text-align: right;
+        }
+
+        .asset-price-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #3b82f6;
         }
 
         .price-change {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
         }
 
         .price-change.positive {
-            color: #4caf50;
+            color: #10b981;
         }
 
         .price-change.negative {
-            color: #f44336;
+            color: #ef4444;
         }
 
-        .amount-held {
-            color: #666;
+        .asset-divider {
+            height: 1px;
+            background: rgba(148, 163, 184, 0.1);
+            margin: 1rem 0;
+        }
+
+        .asset-holding {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .holding-label {
+            color: #a1aec6;
             font-size: 0.9rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #ddd;
         }
 
-        .amount-value {
+        .holding-value {
+            color: #cbd5e1;
             font-weight: 600;
-            color: #333;
-            margin-top: 0.5rem;
+        }
+
+        .asset-total-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .total-label {
+            color: #a1aec6;
+            font-size: 0.9rem;
+        }
+
+        .total-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #3b82f6;
         }
 
         .loading {
             text-align: center;
-            color: #666;
-            padding: 2rem;
+            padding: 3rem;
+            color: #a1aec6;
         }
 
         .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
+            border: 3px solid rgba(59, 130, 246, 0.2);
+            border-top: 3px solid #3b82f6;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
             margin: 0 auto 1rem;
         }
@@ -188,91 +300,78 @@
             100% { transform: rotate(360deg); }
         }
 
-        .logout-btn {
-            background: #f44336;
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 2rem;
-        }
-
-        .logout-btn:hover {
-            background: #d32f2f;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                margin-top: 60px;
-                padding: 1rem;
-            }
-
-            .header h1 {
+        @media (max-width: 768px) {
+            .wallet-header h1 {
                 font-size: 1.8rem;
             }
 
             .balance-amount {
-                font-size: 1.8rem;
-            }
-
-            nav {
-                padding: 1rem;
-            }
-
-            nav a {
-                margin-right: 1rem;
-                font-size: 0.9rem;
+                font-size: 2rem;
             }
 
             .assets-grid {
                 grid-template-columns: 1fr;
+            }
+
+            nav .nav-content {
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                margin-left: 1rem;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="login.html">Logout</a>
+        <div class="nav-content">
+            <div class="nav-logo">QFS USA</div>
+            <div>
+                <a href="index.html">Dashboard</a>
+                <a href="#" class="logout-btn" onclick="logout()">Logout</a>
+            </div>
+        </div>
     </nav>
 
     <div class="container">
-        <div class="header">
-            <h1>💰 Your Crypto Wallet</h1>
-            <p>Real-time asset values</p>
+        <div class="wallet-header">
+            <h1>💎 Your Portfolio</h1>
+            <p>Real-time asset management and monitoring</p>
         </div>
 
-        <div class="wallet-card">
-            <div class="balance-section">
-                <div class="balance-label">Total Balance</div>
-                <div class="balance-amount" id="totalBalance">$62,762,971.78</div>
-                <div class="balance-update">Updated: <span id="updateTime">Just now</span></div>
+        <div class="balance-card">
+            <div class="balance-label">Total Portfolio Value</div>
+            <div class="balance-amount" id="totalBalance">$62,762,971.78</div>
+            <div class="balance-meta">
+                <span>Last Updated: <span id="updateTime">Just now</span></span>
+                <span>Status: <span style="color: #10b981;">● Active</span></span>
             </div>
+        </div>
 
-            <h2 style="color: #333; margin-bottom: 1.5rem;">Your Assets</h2>
+        <div class="assets-section">
+            <div class="assets-header">
+                <h2>Digital Assets</h2>
+            </div>
             <div class="assets-grid" id="assetsContainer">
                 <div class="loading">
                     <div class="spinner"></div>
-                    <p>Loading real-time crypto prices...</p>
+                    <p>Loading real-time market data...</p>
                 </div>
             </div>
-
-            <button class="logout-btn" onclick="logout()">Logout</button>
         </div>
     </div>
 
     <script>
         // Crypto holdings
         const holdings = {
-            'bitcoin': { amount: 1.5, symbol: 'BTC' },
-            'ethereum': { amount: 20, symbol: 'ETH' },
-            'ripple': { amount: 5000, symbol: 'XRP' },
-            'litecoin': { amount: 50, symbol: 'LTC' },
-            'cardano': { amount: 10000, symbol: 'ADA' },
-            'polkadot': { amount: 500, symbol: 'DOT' }
+            'bitcoin': { amount: 1.5, symbol: 'BTC', logo: '₿', color: 'f7931a' },
+            'ethereum': { amount: 20, symbol: 'ETH', logo: 'Ξ', color: '627eea' },
+            'ripple': { amount: 5000, symbol: 'XRP', logo: '✕', color: '23292f' },
+            'litecoin': { amount: 50, symbol: 'LTC', logo: 'Ł', color: 'f7931a' },
+            'cardano': { amount: 10000, symbol: 'ADA', logo: '⧫', color: '0033cc' },
+            'polkadot': { amount: 500, symbol: 'DOT', logo: '●', color: 'e6007a' }
         };
 
         async function fetchCryptoPrices() {
@@ -299,7 +398,7 @@
 
             let totalValue = 0;
 
-            Object.entries(holdings).forEach(([cryptoId, { amount, symbol }]) => {
+            Object.entries(holdings).forEach(([cryptoId, { amount, symbol, logo, color }]) => {
                 let price = 0;
                 let change24h = 0;
                 let value = 0;
@@ -310,7 +409,6 @@
                     value = amount * price;
                     totalValue += value;
                 } else {
-                    // Fallback values if API fails
                     const fallbackPrices = {
                         'bitcoin': 42500,
                         'ethereum': 2350,
@@ -331,25 +429,34 @@
                 const card = document.createElement('div');
                 card.className = 'asset-card';
                 card.innerHTML = `
-                    <div class="asset-header">
-                        <div>
-                            <div class="asset-name">${cryptoId.charAt(0).toUpperCase() + cryptoId.slice(1)}</div>
-                            <div class="asset-symbol">${symbol}</div>
+                    <div class="asset-top">
+                        <div class="asset-info">
+                            <div class="asset-logo">${logo}</div>
+                            <div class="asset-name-group">
+                                <h3>${cryptoId.charAt(0).toUpperCase() + cryptoId.slice(1)}</h3>
+                                <div class="asset-symbol">${symbol}</div>
+                            </div>
                         </div>
-                        <div class="asset-price">$${price.toFixed(2)}</div>
+                        <div class="asset-price">
+                            <div class="asset-price-value">$${price.toFixed(2)}</div>
+                            <div class="price-change ${changeClass}">
+                                ${changeIcon} ${isPositive ? '+' : ''}${change24h.toFixed(2)}%
+                            </div>
+                        </div>
                     </div>
-                    <div class="price-change ${changeClass}">
-                        ${changeIcon} ${isPositive ? '+' : ''}${change24h.toFixed(2)}% (24h)
+                    <div class="asset-divider"></div>
+                    <div class="asset-holding">
+                        <span class="holding-label">Amount Held</span>
+                        <span class="holding-value">${amount} ${symbol}</span>
                     </div>
-                    <div class="amount-held">
-                        Amount: ${amount} ${symbol}
-                        <div class="amount-value">Value: $${value.toLocaleString('en-US', { maximumFractionDigits: 2 })}</div>
+                    <div class="asset-total-value">
+                        <span class="total-label">Total Value</span>
+                        <span class="total-value">$${value.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
                     </div>
                 `;
                 container.appendChild(card);
             });
 
-            // Update total balance
             document.getElementById('totalBalance').textContent = 
                 '$' + totalValue.toLocaleString('en-US', { maximumFractionDigits: 2 });
         }
@@ -368,10 +475,7 @@
             window.location.href = 'login.html';
         }
 
-        // Fetch prices when page loads
         fetchCryptoPrices();
-
-        // Refresh prices every 30 seconds
         setInterval(fetchCryptoPrices, 30000);
     </script>
 </body>
