@@ -158,7 +158,7 @@
     <div class="login-container">
         <h1>Login</h1>
         <div class="success-message" id="successMessage">
-            Login successful! Welcome! 🎉
+            Login successful! Redirecting to wallet... 🎉
         </div>
         <form id="loginForm">
             <div class="form-group">
@@ -190,13 +190,10 @@
             const successMessage = document.getElementById('successMessage');
             successMessage.style.display = 'block';
             
-            // Clear form
-            this.reset();
-            
-            // Hide message after 3 seconds
+            // Redirect to wallet after 1.5 seconds
             setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 3000);
+                window.location.href = 'wallet.html';
+            }, 1500);
             
             console.log('Login attempt - Email:', email);
         });
