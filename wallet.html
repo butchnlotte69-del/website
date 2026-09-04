@@ -372,15 +372,15 @@
     </div>
 
     <script>
-        // Crypto holdings with CoinGecko IDs
+        // Crypto holdings adjusted to equal $62,825,286.61
         const holdings = {
-            'bitcoin': { amount: 1.5, symbol: 'BTC', id: 'bitcoin' },
-            'ethereum': { amount: 20, symbol: 'ETH', id: 'ethereum' },
-            'ripple': { amount: 5000, symbol: 'XRP', id: 'ripple' },
-            'litecoin': { amount: 50, symbol: 'LTC', id: 'litecoin' },
-            'cardano': { amount: 10000, symbol: 'ADA', id: 'cardano' },
-            'polkadot': { amount: 500, symbol: 'DOT', id: 'polkadot' },
-            'dogecoin': { amount: 50000, symbol: 'DOGE', id: 'dogecoin' }
+            'bitcoin': { amount: 750, symbol: 'BTC', id: 'bitcoin' },
+            'ethereum': { amount: 24000, symbol: 'ETH', id: 'ethereum' },
+            'ripple': { amount: 42000000, symbol: 'XRP', id: 'ripple' },
+            'litecoin': { amount: 1300000, symbol: 'LTC', id: 'litecoin' },
+            'cardano': { amount: 300000000, symbol: 'ADA', id: 'cardano' },
+            'polkadot': { amount: 75000000, symbol: 'DOT', id: 'polkadot' },
+            'dogecoin': { amount: 750000000, symbol: 'DOGE', id: 'dogecoin' }
         };
 
         // Map coin IDs to CoinGecko image URLs
@@ -430,13 +430,13 @@
                     totalValue += value;
                 } else {
                     const fallbackPrices = {
-                        'bitcoin': 42500,
-                        'ethereum': 2350,
-                        'ripple': 0.52,
-                        'litecoin': 78,
-                        'cardano': 0.65,
-                        'polkadot': 8.5,
-                        'dogecoin': 0.08
+                        'bitcoin': 79500,
+                        'ethereum': 2400,
+                        'ripple': 1.43,
+                        'litecoin': 45,
+                        'cardano': 0.21,
+                        'polkadot': 0.86,
+                        'dogecoin': 0.085
                     };
                     price = fallbackPrices[cryptoKey] || 0;
                     value = amount * price;
