@@ -251,6 +251,38 @@
             border-color: #dc2626;
         }
 
+        /* Client ID Section */
+        .client-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .client-label {
+            color: #a1aec6;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .client-id {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.light-mode .client-id {
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         /* Container */
         .container {
             max-width: 1000px;
@@ -565,6 +597,10 @@
                 width: 45px;
                 height: 45px;
             }
+
+            .client-id {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -589,6 +625,12 @@
 
     <!-- Main Container -->
     <div class="container">
+        <!-- Client ID Section -->
+        <div class="client-section">
+            <div class="client-label">Client ID</div>
+            <div class="client-id">Client601</div>
+        </div>
+
         <!-- Total Balance Card -->
         <div class="card">
             <div class="card-header">
