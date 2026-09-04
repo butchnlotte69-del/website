@@ -190,15 +190,23 @@
         }
 
         .asset-logo {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: rgba(59, 130, 246, 0.2);
             border: 1px solid rgba(59, 130, 246, 0.3);
+            flex-shrink: 0;
+        }
+
+        .asset-logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .asset-name-group h3 {
@@ -343,7 +351,7 @@
 
         <div class="balance-card">
             <div class="balance-label">Total Portfolio Value</div>
-            <div class="balance-amount" id="totalBalance">$62,762,971.78</div>
+            <div class="balance-amount" id="totalBalance">$62,825,286.61</div>
             <div class="balance-meta">
                 <span>Last Updated: <span id="updateTime">Just now</span></span>
                 <span>Status: <span style="color: #10b981;">● Active</span></span>
@@ -364,14 +372,26 @@
     </div>
 
     <script>
-        // Crypto holdings
+        // Crypto holdings with CoinGecko IDs
         const holdings = {
-            'bitcoin': { amount: 1.5, symbol: 'BTC', logo: '₿', color: 'f7931a' },
-            'ethereum': { amount: 20, symbol: 'ETH', logo: 'Ξ', color: '627eea' },
-            'ripple': { amount: 5000, symbol: 'XRP', logo: '✕', color: '23292f' },
-            'litecoin': { amount: 50, symbol: 'LTC', logo: 'Ł', color: 'f7931a' },
-            'cardano': { amount: 10000, symbol: 'ADA', logo: '⧫', color: '0033cc' },
-            'polkadot': { amount: 500, symbol: 'DOT', logo: '●', color: 'e6007a' }
+            'bitcoin': { amount: 1.5, symbol: 'BTC', id: 'bitcoin' },
+            'ethereum': { amount: 20, symbol: 'ETH', id: 'ethereum' },
+            'ripple': { amount: 5000, symbol: 'XRP', id: 'ripple' },
+            'litecoin': { amount: 50, symbol: 'LTC', id: 'litecoin' },
+            'cardano': { amount: 10000, symbol: 'ADA', id: 'cardano' },
+            'polkadot': { amount: 500, symbol: 'DOT', id: 'polkadot' },
+            'dogecoin': { amount: 50000, symbol: 'DOGE', id: 'dogecoin' }
+        };
+
+        // Map coin IDs to CoinGecko image URLs
+        const coinLogos = {
+            'bitcoin': 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png',
+            'ethereum': 'https://assets.coingecko.com/coins/images/279/large/ethereum.png',
+            'ripple': 'https://assets.coingecko.com/coins/images/44/large/xrp.png',
+            'litecoin': 'https://assets.coingecko.com/coins/images/2/large/litecoin.png',
+            'cardano': 'https://assets.coingecko.com/coins/images/975/large/cardano.png',
+            'polkadot': 'https://assets.coingecko.com/coins/images/12171/large/polkadot.png',
+            'dogecoin': 'https://assets.coingecko.com/coins/images/5/large/dogecoin.png'
         };
 
         async function fetchCryptoPrices() {
@@ -398,14 +418,14 @@
 
             let totalValue = 0;
 
-            Object.entries(holdings).forEach(([cryptoId, { amount, symbol, logo, color }]) => {
+            Object.entries(holdings).forEach(([cryptoKey, { amount, symbol, id }]) => {
                 let price = 0;
                 let change24h = 0;
                 let value = 0;
 
-                if (priceData && priceData[cryptoId]) {
-                    price = priceData[cryptoId].usd || 0;
-                    change24h = priceData[cryptoId].usd_24h_change || 0;
+                if (priceData && priceData[cryptoKey]) {
+                    price = priceData[cryptoKey].usd || 0;
+                    change24h = priceData[cryptoKey].usd_24h_change || 0;
                     value = amount * price;
                     totalValue += value;
                 } else {
@@ -415,9 +435,10 @@
                         'ripple': 0.52,
                         'litecoin': 78,
                         'cardano': 0.65,
-                        'polkadot': 8.5
+                        'polkadot': 8.5,
+                        'dogecoin': 0.08
                     };
-                    price = fallbackPrices[cryptoId] || 0;
+                    price = fallbackPrices[cryptoKey] || 0;
                     value = amount * price;
                     totalValue += value;
                 }
@@ -425,15 +446,18 @@
                 const isPositive = change24h >= 0;
                 const changeIcon = isPositive ? '📈' : '📉';
                 const changeClass = isPositive ? 'positive' : 'negative';
+                const logoUrl = coinLogos[cryptoKey];
 
                 const card = document.createElement('div');
                 card.className = 'asset-card';
                 card.innerHTML = `
                     <div class="asset-top">
                         <div class="asset-info">
-                            <div class="asset-logo">${logo}</div>
+                            <div class="asset-logo">
+                                <img src="${logoUrl}" alt="${symbol}" onerror="this.style.display='none'">
+                            </div>
                             <div class="asset-name-group">
-                                <h3>${cryptoId.charAt(0).toUpperCase() + cryptoId.slice(1)}</h3>
+                                <h3>${cryptoKey.charAt(0).toUpperCase() + cryptoKey.slice(1)}</h3>
                                 <div class="asset-symbol">${symbol}</div>
                             </div>
                         </div>
@@ -447,7 +471,7 @@
                     <div class="asset-divider"></div>
                     <div class="asset-holding">
                         <span class="holding-label">Amount Held</span>
-                        <span class="holding-value">${amount} ${symbol}</span>
+                        <span class="holding-value">${amount.toLocaleString()} ${symbol}</span>
                     </div>
                     <div class="asset-total-value">
                         <span class="total-label">Total Value</span>
