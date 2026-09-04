@@ -1,143 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CryptoX | Digital Assets</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinVault - Cryptocurrency Management Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #3b82f6;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #f0f4f8 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #a1aec6;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #3b82f6;
+            border: 2px solid #3b82f6;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .hero-image {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            font-size: 5rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: #0f172a;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #f0f4f8;
+        }
+
+        .features-subtitle {
+            text-align: center;
+            color: #a1aec6;
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #3b82f6;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #f0f4f8;
+        }
+
+        .feature-card p {
+            color: #a1aec6;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 2rem;
+            text-align: center;
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <nav>
+        <div class="container">
+            <div class="logo">💎 FinVault</div>
+            <div class="nav-right">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="login.html" class="btn btn-primary" style="margin: 0;">Get Started</a>
+            </div>
+        </div>
+    </nav>
 
-<header>
-  <div class="logo">₿ CryptoX</div>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <h1>Secure Cryptocurrency Management</h1>
+                    <p>Manage your digital assets with enterprise-grade security and real-time market insights. FinVault brings professional-grade cryptocurrency management to everyone.</p>
+                    <div class="cta-buttons">
+                        <a href="login.html" class="btn btn-primary">Access Dashboard</a>
+                        <a href="#features" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    💰
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#markets">Markets</a>
-    <a href="#features">Features</a>
-    <a href="#about">About</a>
-  </nav>
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Why Choose FinVault?</h2>
+            <p class="features-subtitle">Enterprise-grade cryptocurrency management platform</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bank-Level Security</h3>
+                    <p>Your assets are protected with military-grade encryption and multi-layer security protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Live market data and 24/7 price tracking across multiple cryptocurrencies and assets.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Instant transaction processing and immediate portfolio updates with zero latency.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Access</h3>
+                    <p>Access your portfolio from anywhere, anytime, on any device with our cloud platform.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Optimized</h3>
+                    <p>Seamless experience on desktop, tablet, and mobile devices with responsive design.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Advanced Tools</h3>
+                    <p>Professional trading tools, portfolio analysis, and risk management features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="header-buttons">
-    <button class="login">Log In</button>
-    <button class="signup">Sign Up</button>
-  </div>
-</header>
-
-<main>
-
-<section id="home" class="hero">
-  <div class="hero-text">
-    <p class="small-title">SECURE • SIMPLE • GLOBAL</p>
-
-    <h1>The Future of Crypto <span>Starts Here</span></h1>
-
-    <p class="description">
-      Explore digital assets with a modern, simple and secure platform
-      designed for the next generation of crypto users.
-    </p>
-
-    <div class="buttons">
-      <button class="primary" onclick="getStarted()">Get Started →</button>
-      <button class="secondary" onclick="showMarkets()">View Markets</button>
-    </div>
-  </div>
-
-  <div class="coin-display">
-    <div class="globe">₿</div>
-    <div class="coin ethereum">Ξ</div>
-    <div class="coin solana">S</div>
-  </div>
-</section>
-
-<section id="markets" class="markets">
-
-  <h2>Crypto Markets</h2>
-  <p class="section-text">Demo market data for your project</p>
-
-  <div class="market-grid">
-
-    <div class="market-card">
-      <div class="coin-name">₿ Bitcoin <small>BTC</small></div>
-      <h3>$63,248.32</h3>
-      <p class="positive">▲ +2.41%</p>
-    </div>
-
-    <div class="market-card">
-      <div class="coin-name">Ξ Ethereum <small>ETH</small></div>
-      <h3>$3,112.64</h3>
-      <p class="positive">▲ +1.83%</p>
-    </div>
-
-    <div class="market-card">
-      <div class="coin-name">S Solana <small>SOL</small></div>
-      <h3>$142.38</h3>
-      <p class="positive">▲ +4.26%</p>
-    </div>
-
-    <div class="market-card">
-      <div class="coin-name">◆ BNB <small>BNB</small></div>
-      <h3>$586.20</h3>
-      <p class="positive">▲ +1.97%</p>
-    </div>
-
-  </div>
-</section>
-
-<section id="features" class="features">
-
-  <h2>Why Choose CryptoX?</h2>
-  <p class="section-text">
-    A smarter and simpler digital-asset experience.
-  </p>
-
-  <div class="feature-grid">
-
-    <div class="feature">
-      <div class="icon">🔐</div>
-      <h3>Trusted Security</h3>
-      <p>Designed with modern security concepts for your digital-asset experience.</p>
-    </div>
-
-    <div class="feature">
-      <div class="icon">📊</div>
-      <h3>Market Insights</h3>
-      <p>View market information through a clean and easy-to-understand interface.</p>
-    </div>
-
-    <div class="feature">
-      <div class="icon">⚡</div>
-      <h3>Easy Experience</h3>
-      <p>A simple interface designed to make exploring crypto straightforward.</p>
-    </div>
-
-    <div class="feature">
-      <div class="icon">🌎</div>
-      <h3>Global Access</h3>
-      <p>A responsive platform designed to work across phones, tablets and computers.</p>
-    </div>
-
-  </div>
-</section>
-
-<section id="about" class="about">
-  <h2>About CryptoX</h2>
-  <p>
-    CryptoX is a fictional cryptocurrency platform created as a software
-    project concept. This demonstration does not process real payments,
-    cryptocurrency purchases or financial transactions.
-  </p>
-</section>
-
-</main>
-
-<footer>
-  <div class="logo">₿ CryptoX</div>
-  <p>© 2026 CryptoX. Demo project.</p>
-</footer>
-
-<script src="script.js"></script>
-
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FinVault. All rights reserved. | Professional Cryptocurrency Management</p>
+        </div>
+    </footer>
 </body>
 </html>
