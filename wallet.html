@@ -422,13 +422,13 @@
     <script>
         // Fixed crypto holdings that equal $62,825,286.61 with Bitcoin dominant
         const holdings = {
-            'bitcoin': { amount: 750, value: 59625000 }, // Bitcoin has the most value
-            'ethereum': { amount: 24000, value: 1560000 },
-            'ripple': { amount: 42000000, value: 600000 },
-            'litecoin': { amount: 1300000, value: 45000 },
-            'cardano': { amount: 300000000, value: 630000 },
-            'polkadot': { amount: 75000000, value: 195000 },
-            'dogecoin': { amount: 750000000, value: 170286.61 }
+            'bitcoin': { amount: 750, value: 59625000, symbol: 'BTC' }, // Bitcoin has the most value
+            'ethereum': { amount: 24000, value: 1560000, symbol: 'ETH' },
+            'ripple': { amount: 42000000, value: 600000, symbol: 'XRP' },
+            'litecoin': { amount: 1300000, value: 45000, symbol: 'LTC' },
+            'cardano': { amount: 300000000, value: 630000, symbol: 'ADA' },
+            'polkadot': { amount: 75000000, value: 195000, symbol: 'DOT' },
+            'dogecoin': { amount: 750000000, value: 170286.61, symbol: 'DOGE' }
         };
 
         // Map coin IDs to CoinGecko image URLs
@@ -452,16 +452,6 @@
             'dogecoin': 'Dogecoin'
         };
 
-        const coinSymbols = {
-            'bitcoin': 'BTC',
-            'ethereum': 'ETH',
-            'ripple': 'XRP',
-            'litecoin': 'LTC',
-            'cardano': 'ADA',
-            'polkadot': 'DOT',
-            'dogecoin': 'DOGE'
-        };
-
         function displayAssets() {
             const container = document.getElementById('assetsContainer');
             container.innerHTML = '';
@@ -469,11 +459,10 @@
             // Sort by value descending
             const sortedAssets = Object.entries(holdings).sort(([,a], [,b]) => b.value - a.value);
 
-            sortedAssets.forEach(([cryptoKey, { amount, value }]) => {
+            sortedAssets.forEach(([cryptoKey, { amount, value, symbol }]) => {
                 const price = value / amount;
                 const logoUrl = coinLogos[cryptoKey];
                 const name = coinNames[cryptoKey];
-                const symbol = coinSymbols[cryptoKey];
 
                 const card = document.createElement('div');
                 card.className = 'asset-card';
@@ -499,7 +488,7 @@
                     </div>
                     <div class="asset-total-value">
                         <span class="total-label">Total Value</span>
-                        <span class="total-value">$${value.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
+                        <span class="total-value">$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                 `;
                 container.appendChild(card);
