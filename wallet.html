@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wallet - QFS USA</title>
+    <title>QFS Wallet</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -44,7 +44,7 @@
             50% { opacity: 1; }
         }
 
-        /* Animated crypto symbols background - More Visible */
+        /* Animated crypto symbols background */
         body::after {
             content: '₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $';
             position: fixed;
@@ -158,59 +158,56 @@
             box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3);
         }
 
-        /* Navigation */
-        nav {
+        /* Header */
+        .header {
             position: fixed;
             top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            left: 0;
+            right: 0;
+            padding: 2rem;
             z-index: 1000;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-        }
-
-        body.light-mode nav {
-            background: rgba(240, 244, 248, 0.95);
-            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
-        }
-
-        nav .nav-content {
-            max-width: 1400px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 1001;
         }
 
-        .nav-logo {
-            font-size: 1.5rem;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .wallet-title {
+            font-size: 2rem;
             font-weight: 800;
             background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.5px;
         }
 
-        nav a {
-            color: #cbd5e1;
-            text-decoration: none;
-            margin-left: 2.5rem;
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95rem;
+        body.light-mode .wallet-title {
+            color: #0f172a;
         }
 
-        body.light-mode nav a {
-            color: #64748b;
+        .qfs-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 800;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        nav a:hover {
-            color: #3b82f6;
+        body.light-mode .qfs-logo {
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+            border: 2px solid rgba(59, 130, 246, 0.2);
         }
 
         .logout-btn {
@@ -230,149 +227,185 @@
             transform: translateY(-2px);
         }
 
+        body.light-mode .logout-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #dc2626;
+        }
+
+        /* Container */
         .container {
-            max-width: 1400px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
             z-index: 1;
+            margin-top: 120px;
         }
 
-        .wallet-header {
-            margin-top: 80px;
-            margin-bottom: 2rem;
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Card Styles - Matching the Design */
+        .card {
+            background: linear-gradient(135deg, rgba(30, 64, 131, 0.6) 0%, rgba(30, 64, 131, 0.4) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        body.light-mode .card {
+            background: linear-gradient(135deg, rgba(200, 210, 240, 0.4) 0%, rgba(200, 210, 240, 0.2) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .card:hover {
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Card Header */
+        .card-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .wallet-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: #f0f4f8;
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #60a5fa;
+            flex-shrink: 0;
         }
 
-        body.light-mode .wallet-header h1 {
-            color: #0f172a;
-        }
-
-        .wallet-header p {
-            color: #a1aec6;
+        .card-title {
             font-size: 1rem;
+            color: #a1aec6;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        body.light-mode .wallet-header p {
+        body.light-mode .card-title {
             color: #64748b;
         }
 
-        .header-content {
-            flex: 1;
+        /* Card Amount */
+        .card-amount {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .withdraw-btn {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-size: 1rem;
+        body.light-mode .card-amount {
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Card Footer */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        body.light-mode .card-footer {
+            border-top: 1px solid rgba(59, 130, 246, 0.15);
+        }
+
+        .card-currency {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        body.light-mode .card-currency {
+            color: #475569;
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
+        .more-details {
+            color: #60a5fa;
+            text-decoration: none;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
-        .withdraw-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        .more-details:hover {
+            color: #93c5fd;
+            gap: 0.8rem;
         }
 
-        .withdraw-btn:active {
-            transform: translateY(0);
+        body.light-mode .more-details {
+            color: #3b82f6;
         }
 
-        /* Balance Card */
-        .balance-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-        }
-
-        body.light-mode .balance-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        .balance-label {
-            color: #a1aec6;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-
-        body.light-mode .balance-label {
-            color: #64748b;
-        }
-
-        .balance-amount {
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-
-        .balance-meta {
-            display: flex;
-            justify-content: space-between;
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        body.light-mode .balance-meta {
-            color: #94a3b8;
+        body.light-mode .more-details:hover {
+            color: #2563eb;
         }
 
         /* Assets Section */
         .assets-section {
-            margin-bottom: 2rem;
+            margin-top: 2rem;
         }
 
-        .assets-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .assets-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f0f4f8;
             margin-bottom: 1.5rem;
         }
 
-        .assets-section h2 {
-            font-size: 1.8rem;
-            color: #f0f4f8;
-        }
-
-        body.light-mode .assets-section h2 {
+        body.light-mode .assets-title {
             color: #0f172a;
         }
 
         .assets-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
         .asset-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: linear-gradient(135deg, rgba(30, 64, 131, 0.5) 0%, rgba(30, 64, 131, 0.3) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.25);
             border-radius: 12px;
             padding: 1.5rem;
             transition: all 0.3s;
@@ -380,18 +413,13 @@
         }
 
         body.light-mode .asset-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border: 1px solid rgba(139, 92, 246, 0.15);
+            background: linear-gradient(135deg, rgba(200, 210, 240, 0.3) 0%, rgba(200, 210, 240, 0.15) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .asset-card:hover {
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
-            transform: translateY(-5px);
-        }
-
-        body.light-mode .asset-card:hover {
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+            transform: translateY(-3px);
+            border-color: rgba(59, 130, 246, 0.4);
         }
 
         .asset-top {
@@ -408,16 +436,14 @@
         }
 
         .asset-logo {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
+            background: rgba(59, 130, 246, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            background: rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            flex-shrink: 0;
+            font-size: 1.2rem;
         }
 
         .asset-logo img {
@@ -427,21 +453,18 @@
             object-fit: cover;
         }
 
-        .asset-name-group h3 {
+        .asset-name {
             color: #f0f4f8;
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
+            font-weight: 600;
         }
 
-        body.light-mode .asset-name-group h3 {
+        body.light-mode .asset-name {
             color: #0f172a;
         }
 
         .asset-symbol {
             color: #a1aec6;
             font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
         }
 
         body.light-mode .asset-symbol {
@@ -449,26 +472,8 @@
         }
 
         .asset-price {
-            text-align: right;
-        }
-
-        .asset-price-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #3b82f6;
-        }
-
-        .price-change {
-            font-size: 0.85rem;
-            margin-top: 0.25rem;
-        }
-
-        .price-change.positive {
-            color: #10b981;
-        }
-
-        .price-change.negative {
-            color: #ef4444;
+            color: #60a5fa;
+            font-weight: 700;
         }
 
         .asset-divider {
@@ -477,98 +482,51 @@
             margin: 1rem 0;
         }
 
-        body.light-mode .asset-divider {
-            background: rgba(139, 92, 246, 0.1);
-        }
-
         .asset-holding {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-
-        .holding-label {
             color: #a1aec6;
             font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
 
-        body.light-mode .holding-label {
+        body.light-mode .asset-holding {
             color: #64748b;
         }
 
-        .holding-value {
+        .asset-value {
             color: #cbd5e1;
             font-weight: 600;
         }
 
-        body.light-mode .holding-value {
+        body.light-mode .asset-value {
             color: #1a1a1a;
         }
 
-        .asset-total-value {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(148, 163, 184, 0.1);
-        }
-
-        body.light-mode .asset-total-value {
-            border-top: 1px solid rgba(139, 92, 246, 0.1);
-        }
-
-        .total-label {
-            color: #a1aec6;
-            font-size: 0.9rem;
-        }
-
-        body.light-mode .total-label {
-            color: #64748b;
-        }
-
-        .total-value {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #3b82f6;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            color: #a1aec6;
-        }
-
-        body.light-mode .loading {
-            color: #64748b;
-        }
-
-        .spinner {
-            border: 3px solid rgba(59, 130, 246, 0.2);
-            border-top: 3px solid #3b82f6;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         @media (max-width: 768px) {
-            .wallet-header {
+            .header {
                 flex-direction: column;
-                align-items: flex-start;
+                gap: 1rem;
             }
 
-            .wallet-header h1 {
-                font-size: 1.8rem;
+            .wallet-title {
+                font-size: 1.5rem;
             }
 
-            .balance-amount {
+            .qfs-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+                margin-top: 200px;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card-amount {
                 font-size: 2rem;
             }
 
@@ -576,27 +534,11 @@
                 grid-template-columns: 1fr;
             }
 
-            nav .nav-content {
-                flex-wrap: wrap;
-            }
-
-            nav a {
-                margin-left: 1rem;
-                font-size: 0.85rem;
-            }
-
-            .withdraw-btn {
-                margin-top: 1rem;
-                width: 100%;
-                justify-content: center;
-            }
-
             .theme-toggle {
-                top: 1.5rem;
+                top: 140px;
                 right: 1.5rem;
                 width: 45px;
                 height: 45px;
-                font-size: 1.2rem;
             }
         }
     </style>
@@ -609,42 +551,84 @@
         <i class="fas fa-moon"></i>
     </button>
 
-    <nav>
-        <div class="nav-content">
-            <div class="nav-logo">QFS USA</div>
-            <div>
-                <a href="index.html">Dashboard</a>
-                <a href="#" class="logout-btn" onclick="logout()">Logout</a>
-            </div>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <div class="wallet-title">QFS Wallet</div>
+            <div class="qfs-logo">QFS</div>
         </div>
-    </nav>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
 
+    <!-- Main Container -->
     <div class="container">
-        <div class="wallet-header">
-            <div class="header-content">
-                <h1>💎 Client851 Wallet</h1>
-                <p>Real-time asset management and monitoring</p>
+        <!-- Total Balance Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div class="card-title">Total Balance</div>
             </div>
-            <button class="withdraw-btn" onclick="goToWithdraw()">
-                <i class="fas fa-arrow-right"></i> Withdraw Funds
-            </button>
+            <div class="card-amount">$62,825,286.61</div>
+            <div class="card-footer">
+                <div class="card-currency">
+                    <span class="flag">🇺🇸</span>
+                    <span>USD</span>
+                </div>
+                <a class="more-details" href="#">
+                    <i class="fas fa-file-alt"></i> More Details
+                </a>
+            </div>
         </div>
 
-        <div class="balance-card">
-            <div class="balance-label">Total Portfolio Value</div>
-            <div class="balance-amount">$62,825,286.61</div>
-            <div class="balance-meta">
-                <span>Last Updated: <span id="updateTime">Just now</span></span>
-                <span>Status: <span style="color: #10b981;">● Active</span></span>
+        <!-- Pending Withdrawals Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <div class="card-title">Pending Withdrawals</div>
+            </div>
+            <div class="card-amount">$0.00</div>
+            <div class="card-footer">
+                <div class="card-currency">
+                    <span class="flag">🇺🇸</span>
+                    <span>USD</span>
+                </div>
+                <a class="more-details" href="#">
+                    <i class="fas fa-file-alt"></i> More Details
+                </a>
             </div>
         </div>
 
+        <!-- Today Transactions Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="card-title">Today Transactions</div>
+            </div>
+            <div class="card-amount">$100.00</div>
+            <div class="card-footer">
+                <div class="card-currency">
+                    <span class="flag">🇺🇸</span>
+                    <span>USD</span>
+                </div>
+                <a class="more-details" href="#">
+                    <i class="fas fa-file-alt"></i> More Details
+                </a>
+            </div>
+        </div>
+
+        <!-- Digital Assets Section -->
         <div class="assets-section">
-            <div class="assets-header">
-                <h2>Digital Assets</h2>
-            </div>
+            <div class="assets-title">Digital Assets</div>
             <div class="assets-grid" id="assetsContainer">
-                <div class="loading">
+                <div style="text-align: center; color: #a1aec6; padding: 2rem;">
                     <div class="spinner"></div>
                     <p>Loading asset data...</p>
                 </div>
@@ -679,9 +663,9 @@
             }
         });
 
-        // Fixed crypto holdings that equal $62,825,286.61 with Bitcoin dominant
+        // Fixed crypto holdings
         const holdings = {
-            'bitcoin': { amount: 750, value: 59625000, symbol: 'BTC' }, // Bitcoin has the most value
+            'bitcoin': { amount: 750, value: 59625000, symbol: 'BTC' },
             'ethereum': { amount: 24000, value: 1560000, symbol: 'ETH' },
             'ripple': { amount: 42000000, value: 600000, symbol: 'XRP' },
             'litecoin': { amount: 1300000, value: 45000, symbol: 'LTC' },
@@ -690,7 +674,7 @@
             'dogecoin': { amount: 750000000, value: 170286.61, symbol: 'DOGE' }
         };
 
-        // Map coin IDs to CoinGecko image URLs
+        // Coin logos
         const coinLogos = {
             'bitcoin': 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png',
             'ethereum': 'https://assets.coingecko.com/coins/images/279/large/ethereum.png',
@@ -731,41 +715,19 @@
                             <div class="asset-logo">
                                 <img src="${logoUrl}" alt="${symbol}" onerror="this.style.display='none'">
                             </div>
-                            <div class="asset-name-group">
-                                <h3>${name}</h3>
+                            <div>
+                                <div class="asset-name">${name}</div>
                                 <div class="asset-symbol">${symbol}</div>
                             </div>
                         </div>
-                        <div class="asset-price">
-                            <div class="asset-price-value">$${price.toFixed(2)}</div>
-                        </div>
+                        <div class="asset-price">$${price.toFixed(2)}</div>
                     </div>
                     <div class="asset-divider"></div>
-                    <div class="asset-holding">
-                        <span class="holding-label">Amount Held</span>
-                        <span class="holding-value">${amount.toLocaleString()} ${symbol}</span>
-                    </div>
-                    <div class="asset-total-value">
-                        <span class="total-label">Total Value</span>
-                        <span class="total-value">$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                    </div>
+                    <div class="asset-holding">Amount Held: <span class="asset-value">${amount.toLocaleString()} ${symbol}</span></div>
+                    <div class="asset-holding">Total Value: <span class="asset-value">$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div>
                 `;
                 container.appendChild(card);
             });
-        }
-
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            document.getElementById('updateTime').textContent = timeString;
-        }
-
-        function goToWithdraw() {
-            window.location.href = 'withdraw.html';
         }
 
         function logout() {
@@ -773,7 +735,6 @@
         }
 
         displayAssets();
-        updateTime();
     </script>
 </body>
 </html>
