@@ -429,6 +429,17 @@
             font-weight: 600;
         }
 
+        .error-message {
+            display: none;
+            background: #ef4444;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
         .divider {
             height: 1px;
             background: rgba(148, 163, 184, 0.2);
@@ -504,6 +515,10 @@
                     ✓ Login successful! Redirecting...
                 </div>
 
+                <div class="error-message" id="errorMessage">
+                    ✗ Invalid password. Password is case-sensitive.
+                </div>
+
                 <form id="loginForm">
                     <div class="form-group">
                         <label for="email">Email Address</label>
@@ -555,19 +570,31 @@
             }
         });
 
-        // Login Form Handler
+        // Login Form Handler - Only accepts password "Client601"
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             const successMessage = document.getElementById('successMessage');
-            successMessage.style.display = 'block';
+            const errorMessage = document.getElementById('errorMessage');
             
-            setTimeout(() => {
-                window.location.href = 'wallet.html';
-            }, 1500);
-            
-            console.log('Login attempt - Email:', email);
+            // Check if password is exactly "Client601"
+            if (password === 'Client601') {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                setTimeout(() => {
+                    window.location.href = 'wallet.html';
+                }, 1500);
+                
+                console.log('Login successful - Email:', email);
+            } else {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'block';
+                document.getElementById('password').value = '';
+                console.log('Login failed - Invalid password');
+            }
         });
     </script>
 </body>
