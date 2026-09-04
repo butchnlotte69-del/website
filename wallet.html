@@ -158,7 +158,7 @@
             box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3);
         }
 
-        /* Header */
+        /* Header - Sticky but hides on scroll */
         .header {
             position: fixed;
             top: 0;
@@ -169,6 +169,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .header.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-100%);
+            pointer-events: none;
         }
 
         .header-left {
@@ -357,7 +367,7 @@
             font-size: 1.2rem;
         }
 
-        .more-details {
+        .more-details, .withdraw-btn-card {
             color: #60a5fa;
             text-decoration: none;
             font-weight: 600;
@@ -366,18 +376,24 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 1rem;
         }
 
-        .more-details:hover {
+        .more-details:hover, .withdraw-btn-card:hover {
             color: #93c5fd;
             gap: 0.8rem;
         }
 
-        body.light-mode .more-details {
+        body.light-mode .more-details,
+        body.light-mode .withdraw-btn-card {
             color: #3b82f6;
         }
 
-        body.light-mode .more-details:hover {
+        body.light-mode .more-details:hover,
+        body.light-mode .withdraw-btn-card:hover {
             color: #2563eb;
         }
 
@@ -552,7 +568,7 @@
     </button>
 
     <!-- Header -->
-    <div class="header">
+    <div class="header" id="header">
         <div class="header-left">
             <div class="wallet-title">QFS Wallet</div>
             <div class="qfs-logo">QFS</div>
@@ -598,9 +614,9 @@
                     <span class="flag">🇺🇸</span>
                     <span>USD</span>
                 </div>
-                <a class="more-details" href="#">
-                    <i class="fas fa-file-alt"></i> More Details
-                </a>
+                <button class="withdraw-btn-card" onclick="goToWithdraw()">
+                    <i class="fas fa-arrow-right"></i> Withdraw Funds
+                </button>
             </div>
         </div>
 
@@ -661,6 +677,29 @@
                 themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
                 themeToggle.title = 'Switch to Light Mode';
             }
+        });
+
+        // Hide header on scroll
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Show header when at the top
+            if (scrollTop < 50) {
+                header.classList.remove('hidden');
+            } 
+            // Hide header when scrolling down
+            else if (scrollTop > lastScrollTop) {
+                header.classList.add('hidden');
+            }
+            // Show header when scrolling up
+            else {
+                header.classList.remove('hidden');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
 
         // Fixed crypto holdings
@@ -728,6 +767,10 @@
                 `;
                 container.appendChild(card);
             });
+        }
+
+        function goToWithdraw() {
+            window.location.href = 'withdraw.html';
         }
 
         function logout() {
