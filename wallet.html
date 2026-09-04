@@ -132,6 +132,8 @@
             z-index: 9999;
             color: #fbbf24;
             box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            opacity: 1;
+            visibility: visible;
         }
 
         .theme-toggle:hover {
@@ -143,6 +145,13 @@
 
         .theme-toggle:active {
             transform: scale(0.95);
+        }
+
+        .theme-toggle.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+            pointer-events: none;
         }
 
         body.light-mode .theme-toggle {
@@ -679,17 +688,19 @@
             }
         });
 
-        // Hide header on scroll - only show when at top
+        // Hide header and theme toggle on scroll - only show when at top
         const header = document.getElementById('header');
 
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Show header only when near the top (within 100px)
+            // Show header and theme toggle only when near the top (within 100px)
             if (scrollTop < 100) {
                 header.classList.remove('hidden');
+                themeToggle.classList.remove('hidden');
             } else {
                 header.classList.add('hidden');
+                themeToggle.classList.add('hidden');
             }
         });
 
