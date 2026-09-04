@@ -14,7 +14,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #0f1419 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -25,7 +25,7 @@
             overflow: hidden;
         }
 
-        /* Crypto USA Background */
+        /* Enhanced Crypto USA Background */
         body::before {
             content: '';
             position: fixed;
@@ -33,55 +33,88 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 15% 30%, rgba(59, 130, 246, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 85% 70%, rgba(139, 92, 246, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 70%),
+                radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
+            animation: pulseGradient 8s ease-in-out infinite;
         }
 
-        /* Animated crypto symbols background */
+        @keyframes pulseGradient {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Animated crypto symbols background - More Visible */
         body::after {
-            content: '₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $';
+            content: '₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $';
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            font-size: 8rem;
+            font-size: 10rem;
             font-weight: bold;
-            opacity: 0.03;
+            opacity: 0.08;
             pointer-events: none;
             z-index: 0;
             overflow: hidden;
             white-space: pre-wrap;
             word-wrap: break-word;
-            line-height: 1.2;
-            color: #3b82f6;
-            animation: drift 20s linear infinite;
+            line-height: 1.4;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: drift 25s linear infinite;
         }
 
         @keyframes drift {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-1000px); }
+            0% { transform: translateY(0px) translateX(0px); }
+            100% { transform: translateY(-1500px) translateX(50px); }
+        }
+
+        /* Grid Pattern Background */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
         }
 
         body.light-mode {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #f0f4f8 0%, #e0e7ff 50%, #f3f4f6 100%);
             color: #1a1a1a;
         }
 
         body.light-mode::before {
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 15% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 70%),
+                radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 50%);
         }
 
         body.light-mode::after {
-            color: #8b5cf6;
-            opacity: 0.02;
+            opacity: 0.05;
+        }
+
+        body.light-mode .grid-background {
+            background-image: 
+                linear-gradient(90deg, rgba(139, 92, 246, 0.08) 1px, transparent 1px),
+                linear-gradient(rgba(139, 92, 246, 0.08) 1px, transparent 1px);
+            opacity: 0.4;
         }
 
         /* Theme Toggle Button */
@@ -92,8 +125,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(59, 130, 246, 0.2);
-            border: 2px solid rgba(59, 130, 246, 0.5);
+            background: rgba(59, 130, 246, 0.3);
+            border: 2px solid rgba(59, 130, 246, 0.6);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -102,12 +135,14 @@
             transition: all 0.3s ease;
             z-index: 9999;
             color: #fbbf24;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
         }
 
         .theme-toggle:hover {
-            background: rgba(59, 130, 246, 0.3);
-            border-color: rgba(59, 130, 246, 0.8);
+            background: rgba(59, 130, 246, 0.4);
+            border-color: rgba(59, 130, 246, 0.9);
             transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
         }
 
         .theme-toggle:active {
@@ -115,14 +150,16 @@
         }
 
         body.light-mode .theme-toggle {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
             color: #3b82f6;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
         }
 
         body.light-mode .theme-toggle:hover {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: rgba(59, 130, 246, 0.7);
+            background: rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.8);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3);
         }
 
         .login-wrapper {
@@ -130,17 +167,18 @@
             grid-template-columns: 1fr 1fr;
             width: 100%;
             height: 100vh;
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
             position: relative;
             z-index: 1;
+            border-radius: 0;
         }
 
         body.light-mode .login-wrapper {
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
         .login-left {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 50%, #8b5cf6 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -151,41 +189,38 @@
             overflow: hidden;
         }
 
-        /* USA map pattern background */
+        /* Animated crypto coins on left side */
         .login-left::before {
-            content: '';
+            content: '₿ Ξ ◆';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20 30 L40 20 L60 30 L50 50 L70 60 L40 70 L30 50 Z' fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/%3E%3C/svg%3E");
-            background-size: 50px 50px;
-            opacity: 0.3;
-            animation: slideLeft 30s linear infinite;
-        }
-
-        @keyframes slideLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100px); }
-        }
-
-        /* Crypto coin animations */
-        .login-left::after {
-            content: '₿';
-            position: absolute;
-            font-size: 15rem;
-            opacity: 0.08;
-            animation: float 6s ease-in-out infinite;
-            top: 10%;
+            font-size: 20rem;
+            opacity: 0.12;
+            animation: float 15s ease-in-out infinite;
+            top: -10%;
             right: -5%;
             z-index: 0;
         }
 
+        /* USA stars pattern */
+        .login-left::after {
+            content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.15;
+            bottom: 5%;
+            left: 5%;
+            z-index: 0;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
+            50% { transform: translateY(-50px) rotate(15deg); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.25; }
         }
 
         .login-left-content {
@@ -205,15 +240,15 @@
         .logo-icon {
             width: 80px;
             height: 80px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .logo-text {
@@ -230,14 +265,14 @@
 
         .login-left p {
             font-size: 1.1rem;
-            opacity: 0.95;
+            opacity: 0.98;
             text-align: center;
             line-height: 1.6;
             max-width: 400px;
         }
 
         .login-right {
-            background: #0f172a;
+            background: #0a0e27;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -311,7 +346,7 @@
             padding: 0.875rem 1rem;
             border: 1px solid rgba(148, 163, 184, 0.3);
             border-radius: 8px;
-            background: rgba(30, 41, 59, 0.8);
+            background: rgba(30, 41, 59, 0.9);
             color: #e2e8f0;
             font-size: 0.95rem;
             transition: all 0.3s;
@@ -327,7 +362,7 @@
             outline: none;
             border-color: #3b82f6;
             background: rgba(30, 41, 59, 1);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
 
         body.light-mode input:focus {
@@ -437,6 +472,8 @@
     </style>
 </head>
 <body>
+    <div class="grid-background"></div>
+
     <!-- Theme Toggle Button -->
     <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
         <i class="fas fa-moon"></i>
