@@ -14,9 +14,148 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #0f1419 100%);
             min-height: 100vh;
             color: #e2e8f0;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+
+        /* Enhanced Crypto USA Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 30%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 85% 70%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.12) 0%, transparent 70%),
+                radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: pulseGradient 8s ease-in-out infinite;
+        }
+
+        @keyframes pulseGradient {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Animated crypto symbols background - More Visible */
+        body::after {
+            content: '₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $ ₿ Ξ ◆ $';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-size: 10rem;
+            font-weight: bold;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.4;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: drift 25s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(0px) translateX(0px); }
+            100% { transform: translateY(-1500px) translateX(50px); }
+        }
+
+        /* Grid Pattern Background */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+                linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        body.light-mode {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e0e7ff 50%, #f3f4f6 100%);
+            color: #1a1a1a;
+        }
+
+        body.light-mode::before {
+            background: 
+                radial-gradient(circle at 15% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 85% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 70%),
+                radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.06) 0%, transparent 50%);
+        }
+
+        body.light-mode::after {
+            opacity: 0.04;
+        }
+
+        body.light-mode .grid-background {
+            background-image: 
+                linear-gradient(90deg, rgba(139, 92, 246, 0.06) 1px, transparent 1px),
+                linear-gradient(rgba(139, 92, 246, 0.06) 1px, transparent 1px);
+            opacity: 0.3;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.3);
+            border: 2px solid rgba(59, 130, 246, 0.6);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            color: #fbbf24;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(59, 130, 246, 0.4);
+            border-color: rgba(59, 130, 246, 0.9);
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        body.light-mode .theme-toggle {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+            color: #3b82f6;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.8);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3);
         }
 
         /* Navigation */
@@ -32,12 +171,19 @@
             border-bottom: 1px solid rgba(148, 163, 184, 0.1);
         }
 
+        body.light-mode nav {
+            background: rgba(240, 244, 248, 0.95);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
         nav .nav-content {
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 1001;
         }
 
         .nav-logo {
@@ -57,6 +203,10 @@
             font-weight: 500;
             transition: color 0.3s;
             font-size: 0.95rem;
+        }
+
+        body.light-mode nav a {
+            color: #64748b;
         }
 
         nav a:hover {
@@ -84,6 +234,8 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .wallet-header {
@@ -100,9 +252,17 @@
             color: #f0f4f8;
         }
 
+        body.light-mode .wallet-header h1 {
+            color: #0f172a;
+        }
+
         .wallet-header p {
             color: #a1aec6;
             font-size: 1rem;
+        }
+
+        body.light-mode .wallet-header p {
+            color: #64748b;
         }
 
         .header-content {
@@ -136,12 +296,17 @@
 
         /* Balance Card */
         .balance-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
             border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 12px;
             padding: 2rem;
             margin-bottom: 2rem;
             backdrop-filter: blur(10px);
+        }
+
+        body.light-mode .balance-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .balance-label {
@@ -151,6 +316,10 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 600;
+        }
+
+        body.light-mode .balance-label {
+            color: #64748b;
         }
 
         .balance-amount {
@@ -170,6 +339,10 @@
             font-size: 0.9rem;
         }
 
+        body.light-mode .balance-meta {
+            color: #94a3b8;
+        }
+
         /* Assets Section */
         .assets-section {
             margin-bottom: 2rem;
@@ -187,6 +360,10 @@
             color: #f0f4f8;
         }
 
+        body.light-mode .assets-section h2 {
+            color: #0f172a;
+        }
+
         .assets-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -194,7 +371,7 @@
         }
 
         .asset-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
             border: 1px solid rgba(148, 163, 184, 0.2);
             border-radius: 12px;
             padding: 1.5rem;
@@ -202,10 +379,19 @@
             backdrop-filter: blur(10px);
         }
 
+        body.light-mode .asset-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
         .asset-card:hover {
             border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
             transform: translateY(-5px);
+        }
+
+        body.light-mode .asset-card:hover {
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
         }
 
         .asset-top {
@@ -247,11 +433,19 @@
             margin-bottom: 0.25rem;
         }
 
+        body.light-mode .asset-name-group h3 {
+            color: #0f172a;
+        }
+
         .asset-symbol {
             color: #a1aec6;
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
+        }
+
+        body.light-mode .asset-symbol {
+            color: #64748b;
         }
 
         .asset-price {
@@ -283,6 +477,10 @@
             margin: 1rem 0;
         }
 
+        body.light-mode .asset-divider {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
         .asset-holding {
             display: flex;
             justify-content: space-between;
@@ -295,9 +493,17 @@
             font-size: 0.9rem;
         }
 
+        body.light-mode .holding-label {
+            color: #64748b;
+        }
+
         .holding-value {
             color: #cbd5e1;
             font-weight: 600;
+        }
+
+        body.light-mode .holding-value {
+            color: #1a1a1a;
         }
 
         .asset-total-value {
@@ -308,9 +514,17 @@
             border-top: 1px solid rgba(148, 163, 184, 0.1);
         }
 
+        body.light-mode .asset-total-value {
+            border-top: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
         .total-label {
             color: #a1aec6;
             font-size: 0.9rem;
+        }
+
+        body.light-mode .total-label {
+            color: #64748b;
         }
 
         .total-value {
@@ -323,6 +537,10 @@
             text-align: center;
             padding: 3rem;
             color: #a1aec6;
+        }
+
+        body.light-mode .loading {
+            color: #64748b;
         }
 
         .spinner {
@@ -372,10 +590,25 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .theme-toggle {
+                top: 1.5rem;
+                right: 1.5rem;
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="grid-background"></div>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <nav>
         <div class="nav-content">
             <div class="nav-logo">QFS USA</div>
@@ -420,6 +653,32 @@
     </div>
 
     <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        // Theme toggle click handler
+        themeToggle.addEventListener('click', function() {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                themeToggle.title = 'Switch to Dark Mode';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                themeToggle.title = 'Switch to Light Mode';
+            }
+        });
+
         // Fixed crypto holdings that equal $62,825,286.61 with Bitcoin dominant
         const holdings = {
             'bitcoin': { amount: 750, value: 59625000, symbol: 'BTC' }, // Bitcoin has the most value
