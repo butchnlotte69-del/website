@@ -679,27 +679,18 @@
             }
         });
 
-        // Hide header on scroll
-        let lastScrollTop = 0;
+        // Hide header on scroll - only show when at top
         const header = document.getElementById('header');
 
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Show header when at the top
-            if (scrollTop < 50) {
+            // Show header only when near the top (within 100px)
+            if (scrollTop < 100) {
                 header.classList.remove('hidden');
-            } 
-            // Hide header when scrolling down
-            else if (scrollTop > lastScrollTop) {
+            } else {
                 header.classList.add('hidden');
             }
-            // Show header when scrolling up
-            else {
-                header.classList.remove('hidden');
-            }
-            
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
 
         // Fixed crypto holdings
