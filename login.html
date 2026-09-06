@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Portal</title>
+    <title>QFS USA Login Portal</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -221,6 +221,12 @@
             50% { opacity: 0.25; }
         }
 
+        .login-left-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
         .login-right {
             background: #0a0e27;
             display: flex;
@@ -401,6 +407,36 @@
             color: #60a5fa;
             text-decoration: underline;
         }
+
+        @media (max-width: 768px) {
+            .login-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .login-left {
+                display: none;
+            }
+
+            .login-right {
+                min-height: 100vh;
+            }
+
+            .login-container {
+                max-width: 100%;
+            }
+
+            .login-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .theme-toggle {
+                top: 1.5rem;
+                right: 1.5rem;
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -413,12 +449,14 @@
 
     <div class="login-wrapper">
         <div class="login-left">
+            <div class="login-left-content">
+            </div>
         </div>
 
         <div class="login-right">
             <div class="login-container">
                 <div class="login-header">
-                    <h1>Login Portal</h1>
+                    <h1>QFS USA Login Portal</h1>
                     <p>Sign in to your secure account</p>
                 </div>
 
